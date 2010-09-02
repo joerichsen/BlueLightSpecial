@@ -12,11 +12,5 @@ Rails::Initializer.run do |config|
     :lib     => 'formtastic', 
     :source  => 'http://gems.github.com'
   
-  config.gem "mini_fb", 
-    :version => '=0.2.2'
-  
-  config.gem "delayed_job", 
-    :version => '=1.8.4'
-
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 end

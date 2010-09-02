@@ -6,16 +6,12 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name        = "blue_light_special"
-    gem.summary     = %Q{Rails authentication by email and password}
-    gem.description = %Q{Rails authentication by email and password with integrated dependencies to MadMimi. Also provides administrative user impersonation.}
+    gem.summary     = %Q{Clearance compatible administrative user impersonation.}
+    gem.description = %Q{Clearance compatible administrative user impersonation.}
     gem.email       = "nate@envylabs.com"
     gem.homepage    = "http://github.com/envylabs/blue_light_special"
     gem.authors     = ["Nathaniel Bibler", "Mark Kendall", "Caike Souza"]
     gem.files       = FileList["[A-Z]*", "{app,config,generators,lib,shoulda_macros,rails}/**/*"]
-    
-    gem.add_dependency "mini_fb", '=0.2.2'
-    gem.add_dependency "delayed_job", '=1.8.4'
-    gem.add_dependency "mad_mimi_mailer", '=0.0.7'
     
     gem.add_development_dependency "shoulda", ">= 0"
   end
@@ -28,8 +24,7 @@ namespace :test do
   Rake::TestTask.new(:basic => ["check_dependencies",
                                 "generator:cleanup",
                                 "generator:blue_light_special",
-                                "generator:blue_light_special_tests",
-                                "generator:blue_light_special_admin"]) do |task|
+                                "generator:blue_light_special_tests"]) do |task|
     task.libs << "lib"
     task.libs << "test"
     task.pattern = "test/{controllers,models}/*_test.rb"
@@ -37,7 +32,7 @@ namespace :test do
   end
 end
 
-generators = %w(blue_light_special blue_light_special_tests blue_light_special_admin)
+generators = %w(blue_light_special blue_light_special_tests)
 
 namespace :generator do
   desc "Cleans up the test app before running the generator"
@@ -54,7 +49,7 @@ namespace :generator do
   
   desc "Run the blue_light_special generator"
   task :blue_light_special do
-    system "cd test/rails_root && ./script/generate blue_light_special -f && ./script/generate delayed_job && rake gems:unpack && rake db:migrate db:test:prepare"
+    system "cd test/rails_root && ./script/generate blue_light_special -f && rake gems:unpack && rake db:migrate db:test:prepare"
   end
 
   desc "Run the blue_light_special tests generator"
@@ -62,11 +57,6 @@ namespace :generator do
     system "cd test/rails_root && ./script/generate blue_light_special_tests -f"
   end
 
-  desc "Run the blue_light_special admin generator"
-  task :blue_light_special_admin do
-    system "cd test/rails_root && ./script/generate blue_light_special_admin -f"
-  end
-  
 end
 
 begin

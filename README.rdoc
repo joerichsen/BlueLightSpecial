@@ -1,39 +1,21 @@
 = Blue Light Special
 
-Blue Light Special is a derivative from Thoughtbot's 
-{Clearance}[http://github.com/thoughtbot/clearance] gem.  It's a highly
-opinionated starting point for many of our projects at Envy Labs.
+This fork (joerichsen / BlueLightSpecial) of Envy Labs' Blue Light Special
+is a stripped down version that contains only the Impersonation parts.
 
-In addition to the basic email and password authentication provided by
-Clearance, a default Blue Light Special installation includes:
-
-* optional support for authenticating with Facebook Connect, using {mini_fb}[http://github.com/appoxy/mini_fb]
-
-* a simple role system with built-in support for admin users
-
-* the ability for an admin to impersonate any other user
-
-* use of {MadMimi}[http://madmimi.com/r/b8599b9343f82e3bc30984ca4f3fea3f] for sending notification emails
-
-* {delayed_job}[http://github.com/tobi/delayed_job] for sending emails in the background
-	
-* a basic application layout and stylesheet
+It is supposed to be used in connection with a Rails (2.3) app that already
+has Clearance installed and up and running.
 
 == Setup
 
-After installing the Blue Light Special gem, require it in your Rails app and run
-the blue_light_special generator.
+Install it like this
+  ./script/plugin install http://github.com/joerichsen/BlueLightSpecial.git
 
-In your config/environment.rb:
-
-  config.gem 'blue_light_special'
-
-Run the generators and migrate your database:
-
+Run the generators
+  
   script/generate blue_light_special
-  script/generate delayed_job
   rake db:migrate
-	
+
 You'll also want to take a look at Blue Light Special's configuration options
 in config/blue_light_special.yml.
 
@@ -50,45 +32,6 @@ After the generator runs, you'll see  instructions for updating
 test/test_helper.rb to include some helper methods that the tests require.
 You can also use these helper methods in your own integration tests whenever
 you need to sign a user in or out.
-
-== Administration Interface
-
-The final Blue Light Special generator builds a very simple administration
-interface for your app.  This allows admins to manage and impersonate users,
-and it can be used as a starting point for building a more elaborate admin
-interface.  If you'd like to generate the admin interface, run:
-
-  script/generate blue_light_special_admin
-	
-This will generate your user admin controller and its integration test.
-
-== Mad Mimi
-
-If you'd like an overview of Mad Mimi, check out the third part of
-{this screencast}[http://railslab.newrelic.com/2009/10/23/episode-21-on-the-edge-part-3].
-In order to get Blue Light Special working with Mad Mimi, you'll need to sign
-up for an account at {madmimi.com}[http://madmimi.com/r/b8599b9343f82e3bc30984ca4f3fea3f].
-
-Your Mad Mimi account needs API access, so be sure to enable that during the signup
-process. The support people at Mad Mimi will manually authorize your account for
-API access. This usually happens within a few hours after you've signed up. Until
-your account is authorized, you'll see HTTP errors when your Rails app attempts to
-send email.
-
-After you've signed up and your API access has been approved, all you'll need to do is
-put your Mad Mimi username and API key in config/blue_light_special.yml.
-
-== Facebook Connect
-
-To set up Facebook Connect, go to the {Facebook developer page}[http://facebook.com/developers]
-and create a new Facebook app. Since you're only using this app for Facebook Connect,
-you can leave most of the fields blank. Be sure to give your app a name, and then
-head over to the Connect settings and set the Connect URL to point at your Rails app.
-In the Advanced section, you'll need to set Email Domain to the domain from which you'll
-be sending email messages.
-
-After you've finished setting up your Facebook app, grab its API key and secret key
-and put them in config/blue_light_special.yml.
 
 == Copyright
 
