@@ -16,6 +16,16 @@ Run the generators
   script/generate blue_light_special
   rake db:migrate
 
+Add an admin? method to your user model
+
+  def admin?
+    role == 'admin'
+  end
+
+And you might want to add something to your views to stop impersonating
+
+  <%= link_to 'Stop impersonating', impersonation_path, :method => :delete %>
+
 You'll also want to take a look at Blue Light Special's configuration options
 in config/blue_light_special.yml.
 
