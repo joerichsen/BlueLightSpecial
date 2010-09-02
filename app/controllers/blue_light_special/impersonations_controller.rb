@@ -1,4 +1,6 @@
 class BlueLightSpecial::ImpersonationsController < ApplicationController
+  unloadable
+
   before_filter :authenticate
   before_filter :check_role, :except => :destroy
   
