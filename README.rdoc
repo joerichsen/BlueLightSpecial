@@ -24,10 +24,12 @@ Add an admin? method to your user model
 
 And you might want to add something to your views to stop impersonating
 
-  <%= link_to 'Stop impersonating', impersonation_path, :method => :delete %>
+  <%= link_to('Stop impersonating', impersonation_path, :method => :delete) unless session[:admin_user_id].blank? %>
 
 You'll also want to take a look at Blue Light Special's configuration options
 in config/blue_light_special.yml.
+
+Oh, and of course you need to go to http://localhost:3000/impersonations with a user who has "admin" in his role field.
 
 == Tests
 
